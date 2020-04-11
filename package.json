@@ -1,0 +1,43 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "blog.js",
+  "scripts": {
+    "start": "node --inspect=5858 -r ts-node/register ./src/server.ts",
+    "start:watch": "nodemon",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/express-graphql": "^0.9.0",
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^13.11.1",
+    "concurrently": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^1.18.10",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "npm start",
+    "ext": "ts"
+  }
+}
