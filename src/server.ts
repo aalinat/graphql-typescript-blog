@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLList, GraphQLSchema } from "graphql";
 
-const { PostType, CommentType, AuthorType, RootQueryType } = require('./schema');
+const { RootQueryType } = require('./schema');
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const app = express();

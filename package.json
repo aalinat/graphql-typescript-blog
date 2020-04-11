@@ -4,7 +4,7 @@
   "description": "",
   "main": "blog.js",
   "scripts": {
-    "start": "node --inspect=5858 -r ts-node/register ./src/server.ts",
+    "start": "node --inspect=5858 -r ts-node/register ./src/Server.ts",
     "start:watch": "nodemon",
     "build": "tsc"
   },

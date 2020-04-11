@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLNonNull, GraphQLList } from "graphql";
-import { comments, posts, authors } from "./models/mock";
+import { comments, posts, authors } from "./models/Mock";
 import { PostType } from "./models/PostType";
 import { CommentType } from "./models/CommentType";
 import { AuthorType } from "./models/AuthorType";

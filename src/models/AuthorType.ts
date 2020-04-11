@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLNonNull, GraphQLList } from "graphql";
-import { posts } from "./mock";
+import { posts } from "./Mock";
 import { PostType } from "./PostType";
 export const AuthorType = new GraphQLObjectType({
   name: "Author",
