@@ -68,7 +68,7 @@ Steps to run this project:
 # Examples
 
 * mutation:
-```json
+```
 mutation {
   addComment(content: "Comment 1", postId: 1, authorId: 1) {
     content
@@ -76,7 +76,7 @@ mutation {
 }
 ```
 * query
-```json
+```
 {
   posts {
     id
