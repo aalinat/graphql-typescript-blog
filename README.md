@@ -1,4 +1,4 @@
-# Awesome Project Build with TypeORM
+# GRAPHQL TypeORM TypeScript Blog
 
 Steps to run this project:
 
@@ -62,5 +62,38 @@ Steps to run this project:
       ]
     }
   ]
+}
+```
+
+# Examples
+
+* mutation:
+```json
+mutation {
+  addComment(content: "Comment 1", postId: 1, authorId: 1) {
+    content
+  }
+}
+```
+* query
+```json
+{
+  posts {
+    id
+    title
+    content
+    comments {
+      id
+      content
+      author {
+        id
+        name
+      }
+    }
+    author {
+      id
+      name
+    }
+  }
 }
 ```
