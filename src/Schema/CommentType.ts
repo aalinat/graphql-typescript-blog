@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLNonNull, GraphQLList } from "graphql";
-import { posts, authors } from "../Models/Mock";
 import { PostType } from "./PostType";
+import { AuthorType } from "./AuthorType";
 export const CommentType = new GraphQLObjectType({
   name: "Comment",
   description: "Comment",
@@ -11,12 +11,12 @@ export const CommentType = new GraphQLObjectType({
     authorId: { type: GraphQLNonNull(GraphQLInt) },
     post: {
       type: PostType, resolve: (comment) => {
-        return posts.find(post => post.id === comment.postId)
+        return comment.post;
       }
     },
     author: {
-      type: PostType, resolve: (comment) => {
-        return authors.find(authors => authors.id === comment.authorId)
+      type: AuthorType, resolve: (comment) => {
+        return comment.author;
       }
     }
   })

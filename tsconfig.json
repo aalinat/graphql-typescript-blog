@@ -1,15 +1,23 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "lib": [
+      "es6",
+      "ESNext.AsyncIterable"
+    ],
     "module": "commonjs",
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    ".vscode"
+    ".vscode",
+    ".history",
+    ".git"
   ]
 }

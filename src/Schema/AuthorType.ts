@@ -1,6 +1,9 @@
 import { GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLNonNull, GraphQLList } from "graphql";
-import { posts } from "../Models/Mock";
+import { posts } from "../entity/Mock";
 import { PostType } from "./PostType";
+import { PostService } from "../Services/PostService";
+import { CommentService } from "../Services/CommentService";
+import { CommentType } from "./CommentType";
 export const AuthorType = new GraphQLObjectType({
   name: "Author",
   description: "Author",
@@ -10,7 +13,13 @@ export const AuthorType = new GraphQLObjectType({
     posts: {
       type: GraphQLList(PostType),
       resolve: (author) => {
-        return posts.filter(post => post.authorId === author.id)
+        return new PostService().getByAuthor(author.id);
+      }
+    },
+    comments: {
+      type: GraphQLList(CommentType),
+      resolve: (author) => {
+        return new CommentService().getByAuthor(author.id);
       }
     }
   })

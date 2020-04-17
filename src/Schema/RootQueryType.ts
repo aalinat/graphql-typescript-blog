@@ -2,14 +2,11 @@ import { GraphQLObjectType, GraphQLInt, GraphQLNonNull, GraphQLList } from "grap
 import { PostType } from "./PostType";
 import { CommentType } from "./CommentType";
 import { AuthorType } from "./AuthorType";
-import { CRUDService } from '../Services/CRUDService'
+import { PostService } from '../Services/PostService';
 import PaginationRequest from "../DTO/PaginationRequest";
-import { Post, Comment, Author } from "../Models/Models";
-
-const postService = new CRUDService<Post>();
-const commentService = new CRUDService<Comment>();
-const authorService = new CRUDService<Author>();
-
+import { Post } from "../entity/Post";
+import { AuthorService } from "../Services/AuthorService";
+import { CommentService } from "../Services/CommentService";
 export const RootQueryType = new GraphQLObjectType({
     name: "Root",
     description: "Root Query",
@@ -21,9 +18,9 @@ export const RootQueryType = new GraphQLObjectType({
             },
             type: new GraphQLList(PostType),
 
-            resolve: (parent, args) => {
+            resolve: async (parent, args) => {
                 const pagination = new PaginationRequest(args.start, args.offset);
-                return postService.getAll(pagination);
+                return await new PostService().getPosts(pagination);
             }
         },
         comments: {
@@ -32,9 +29,9 @@ export const RootQueryType = new GraphQLObjectType({
                 start: { type: GraphQLInt },
                 offset: { type: GraphQLInt }
             },
-            resolve: (parent, args) => {
+            resolve: async (parent, args) => {
                 const pagination = new PaginationRequest(args.start, args.offset);
-                return commentService.getAll(pagination);
+                return await new CommentService().getComments(pagination);
             }
         },
         authors: {
@@ -43,9 +40,9 @@ export const RootQueryType = new GraphQLObjectType({
                 start: { type: GraphQLInt },
                 offset: { type: GraphQLInt }
             },
-            resolve: (parent, args) => {
+            resolve: async (parent, args) => {
                 const pagination = new PaginationRequest(args.start, args.offset);
-                return authorService.getAll(pagination);
+                return await new AuthorService().getAuthors(pagination);
             }
         },
         author: {
@@ -55,8 +52,8 @@ export const RootQueryType = new GraphQLObjectType({
                     type: GraphQLInt
                 }
             },
-            resolve: (parent, args) => {
-                return authorService.getById(args.id);
+            resolve: async (parent, args) => {
+                return await new AuthorService().getAuthor(args.id);
             }
         },
         post: {
@@ -66,8 +63,9 @@ export const RootQueryType = new GraphQLObjectType({
                     type: GraphQLNonNull(GraphQLInt)
                 }
             },
-            resolve: (parent, args) => {
-                return postService.getById(args.id);
+            resolve: async (parent, args) => {
+                const post: Post = await new PostService().getPost(args.id);
+                return post;
             }
         },
         comment: {
@@ -75,8 +73,8 @@ export const RootQueryType = new GraphQLObjectType({
             args: {
                 id: { type: GraphQLNonNull(GraphQLInt) }
             },
-            resolve: (args) => {
-                return commentService.getById(args.id);
+            resolve: async (args) => {
+                return await new CommentService().getComment(args.id);
             }
         }
     })
